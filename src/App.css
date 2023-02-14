@@ -1,0 +1,39 @@
+
+
+.nav-ul{
+    background-color:rgba(106, 199, 236, 0.938);
+    margin: 0;
+    padding: 5px;
+}
+
+.rightnav{
+    text-align: right;
+}
+
+.foot {
+    background-color:rgba(106, 199, 236, 0.938);
+    bottom: 0%;
+    text-align: center;
+    width: 100%;
+    position: absolute;
+
+}
+.product-list{
+    text-align: center;
+}
+
+
+
+.nav-ul li {
+display:inline-block;
+padding: 10px;
+margin-left: 3px;
+
+}
+
+.nav-ul li a {
+    color: #fff;
+    padding: 5px;
+    text-decoration:none;
+}
+
