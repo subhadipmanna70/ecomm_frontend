@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 import axios from "axios";
 import "./page.css";
+
+const URL = process.env.REACT_APP_BACKEND_SERVER;
+
 
 const Products = () => {
   const [productlist, setProductlist] = useState([]);
@@ -10,20 +12,26 @@ const Products = () => {
 
   useEffect(() => {
     getProductlist();
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[]);
 
   const getProductlist = async () => {
-    let getProduct = await axios.get("http://localhost:8000/products",{
-      headers:{
-        authorization: JSON.parse(localStorage.getItem("token"))
-      }
+    let auth=localStorage.getItem("user");
+
+    let getProduct = await axios.get(`${URL}/products`, {
+      headers: {
+        authorization: JSON.parse(localStorage.getItem("token")),
+        user_id: JSON.parse(auth)._id
+      },
     });
     setProductlist(getProduct.data);
+    console.log(JSON.parse(auth)._id);
   };
 
   const deleteProduct = async (id) => {
-    let result = await axios.delete(`http://localhost:8000/product/${id}`,{headers: {authorization: JSON.parse(localStorage.getItem("token"))
-  }});
+    let result = await axios.delete(`${URL}/product/${id}`, {
+      headers: { authorization: JSON.parse(localStorage.getItem("token")) },
+    });
     getProductlist();
     if (result.data.deletedCount) {
       alert("product deleted");
@@ -36,8 +44,9 @@ const Products = () => {
 
   const searchHandler = async (key) => {
     if (key) {
-      let result = await axios.get(`http://localhost:8000/search/${key}`,{headers: {authorization: JSON.parse(localStorage.getItem("token"))
-    }});
+      let result = await axios.get(`${URL}/search/${key}`, {
+        headers: { authorization: JSON.parse(localStorage.getItem("token")) },
+      });
       setProductlist(result.data);
     } else {
       getProductlist();

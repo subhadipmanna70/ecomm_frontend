@@ -3,7 +3,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import {useParams,useNavigate} from "react-router-dom"
 import "./page.css";
-
+const URL= process.env.REACT_APP_BACKEND_SERVER;
 
 const Updateproduct=()=>{
     const [name,setName]=useState("");
@@ -20,7 +20,7 @@ const Updateproduct=()=>{
   
   
     const getProductdetails=async()=>{
-        let result=await axios.get(`http://localhost:8000/product/${params.id}`,{headers: {authorization: JSON.parse(localStorage.getItem("token"))
+        let result=await axios.get(`${URL}/product/${params.id}`,{headers: {authorization: JSON.parse(localStorage.getItem("token"))
     }});
         console.warn(result)
         setName(result.data.name);
@@ -34,7 +34,7 @@ const Updateproduct=()=>{
 
     const updateProduct=async()=>{
         let data={name,price,category,company};
-       let result=await axios.put(`http://localhost:8000/product/${params.id}`,data,{headers: {authorization: JSON.parse(localStorage.getItem("token"))
+       let result=await axios.put(`${URL}/product/${params.id}`,data,{headers: {authorization: JSON.parse(localStorage.getItem("token"))
         }});
         if(result.data.modifiedCount>0){
             alert("product details updated");

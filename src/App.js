@@ -5,6 +5,8 @@ import Footer from './components/footer';
 import Signup from './components/signup';
 import Login from './components/login';
 import Products from './components/products';
+import Profile from './components/profile';
+
 import Updateproduct from './components/update_product';
 
 import PrivateComponent from './components/privatecomponent';
@@ -21,7 +23,7 @@ function App() {
         <Route path="/" element={<Products/>}/>
         <Route path="/add" element={<AddProduct/>}/>
         <Route path="/update/:id" element={<Updateproduct/>}/>
-        <Route path="/profile" element={<h1>Profile page</h1>}/>
+        <Route path="/profile" element={<Profile/>}/>
         </Route>
         <Route path="/signup" element={<Signup/>}/>
         <Route path="/login" element={<Login/>}/>

@@ -1,6 +1,9 @@
 import axios from "axios";
 import React, { useState } from "react";
 import "./page.css";
+
+const URL = process.env.REACT_APP_BACKEND_SERVER;
+
 const AddProduct=()=>{
     const [name,setName]=useState("");
     const [price,setPrice]=useState("");
@@ -12,7 +15,7 @@ const AddProduct=()=>{
             let userId=JSON.parse(localStorage.getItem("user"))._id;
             console.log(userId);
             let data={name,price,category,company,userId};
-            const baseURL="http://localhost:8000/add-product";
+            let baseURL=`${URL}/add-product`;
             let add= await axios.post(baseURL,data,{headers: {authorization: JSON.parse(localStorage.getItem("token"))
         }});
             if(add){

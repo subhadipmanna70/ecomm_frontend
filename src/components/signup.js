@@ -3,6 +3,7 @@ import axios from 'axios';
 import {useNavigate} from 'react-router-dom'
 import React,{useState,useEffect} from 'react';
 import './page.css';
+const URL= process.env.REACT_APP_BACKEND_SERVER;
 
 
 
@@ -41,7 +42,7 @@ const Signup=()=>{
 
     const CollectData = async(e) =>{
         e.preventDefault();
-        const baseUrl = "http://localhost:8000/register";
+        const baseUrl = `${URL}/register`;
         const data = {name,email,password ,header:{}};
         const result = await axios.post(baseUrl, data);
         console.log(result);

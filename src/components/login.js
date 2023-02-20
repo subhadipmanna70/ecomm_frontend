@@ -1,9 +1,9 @@
-
 import axios from "axios";
 import {useNavigate} from 'react-router-dom'
 import React,{useEffect, useState} from 'react';
 import './page.css';
 
+const URL= process.env.REACT_APP_BACKEND_SERVER;
 
 const Login=()=>{
     const [password,setPassword]=useState("");
@@ -21,10 +21,12 @@ const Login=()=>{
 
 
     const handlelogin=async(e)=>{
-        if(email && password){ e.preventDefault();
+        if(email && password){ 
+            e.preventDefault();
             let data={email,password};
-    
-            const baseURL="http://localhost:8000/login";
+       
+
+            const baseURL=`${URL}/login`;
             let result= await axios.post(baseURL,data);
             // console.log(result);
             if(result.data.auth){
@@ -32,7 +34,7 @@ const Login=()=>{
                 localStorage.setItem("token",JSON.stringify(result.data.auth));
 
                 navigate("/");
-
+                console.log(URL);
             }
             else{
                 alert("please enter correct details");
@@ -43,7 +45,6 @@ const Login=()=>{
         }
        
     }
-
 
 
 
